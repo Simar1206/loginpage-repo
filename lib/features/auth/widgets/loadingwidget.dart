@@ -39,22 +39,22 @@ class _LoadingwidgetState extends State<Loadingwidget>
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
-      height: 200,
+      width: 100,
+      height: 100,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: CircularProgressIndicator(
+              constraints: BoxConstraints(minWidth: 150, minHeight: 150),
               value: _animation.value,
-              strokeWidth: 45,
               color: ConstantColors.headlinecolor,
-              backgroundColor: ConstantColors.primarycolor,
+              backgroundColor: Colors.white.withAlpha(9),
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: ConstantColors.headlinecolor,
@@ -62,7 +62,7 @@ class _LoadingwidgetState extends State<Loadingwidget>
             child: Icon(
               Icons.arrow_right_alt_rounded,
               color: ConstantColors.primarycolor,
-              size: 50,
+              size: 45,
             ),
           ),
         ],
