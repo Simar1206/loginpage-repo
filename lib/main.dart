@@ -4,6 +4,7 @@ import 'package:burgerapp/features/auth/view/register_page.dart';
 import 'package:burgerapp/onboardingscreen/onboardingscreen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
       debugShowCheckedModeBanner: false,
       routes: {
         '/login_page': (context) => LoginPage(),
