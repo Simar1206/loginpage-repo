@@ -7,11 +7,14 @@ class Signinwidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      height: 40,
+      width: 40,
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        image: DecorationImage(image: AssetImage(url)),
+        border: Border.all(color: Color(0xffD6D6D6)),
       ),
+      child: Image.asset(url),
     );
   }
 }
