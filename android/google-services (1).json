@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1084715997112",
+    "project_id": "proburgerauth",
+    "storage_bucket": "proburgerauth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084715997112:android:4645b8833ddf9836c0614d",
+        "android_client_info": {
+          "package_name": "pro.burgerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHEzPXAT3JVfVvaQjkJUypZ5izxpUcB_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950653827996",
+    "project_id": "loginpage-9c357",
+    "storage_bucket": "loginpage-9c357.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950653827996:android:2a569bdcd2e734faf26659",
+        "android_client_info": {
+          "package_name": "com.example.burgerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDBiEvmI9xvAaADCv2ac6pGVU2h95Glz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
