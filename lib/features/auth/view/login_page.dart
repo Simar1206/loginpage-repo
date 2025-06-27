@@ -50,24 +50,26 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               //sized box for spacing
-              SizedBox(height: 35),
-
+              SizedBox(height: 35), //35
               // email address title + txtfield
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Email Address",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ), //15
                 ),
               ),
               //*Sizedbox
-              SizedBox(height: 8),
+              SizedBox(height: 8), //8
 
               TextField(
                 controller: _emailcontroller,
                 decoration: InputDecoration(
                   labelText: "Email Address",
-                  constraints: BoxConstraints(maxHeight: 52),
+                  constraints: BoxConstraints(maxHeight: 52), //52
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -75,18 +77,20 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               //sizedbox
-              SizedBox(height: 16),
-
+              SizedBox(height: 16), //16
               //password title + txtfield
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Password",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ), //15
                 ),
               ),
               //*Sizedbox
-              SizedBox(height: 8),
+              SizedBox(height: 8), //8
 
               TextField(
                 controller: _passcontroller,
@@ -102,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                       _obsecuretxt ? Icons.visibility_off : Icons.visibility,
                     ),
                   ),
-                  constraints: BoxConstraints(maxHeight: 52),
+                  constraints: BoxConstraints(maxHeight: 52), //52
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -124,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                       "Forgot password?",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 14, //14
                         color: ConstantColors.primarycolor,
                       ),
                     ),
@@ -150,6 +154,34 @@ class _LoginPageState extends State<LoginPage> {
                       );
                       return;
                     }
+                    // AuthServices auth = AuthServices();
+                    // String result =
+                    //     auth.login(
+                    //           email: _emailcontroller.text,
+                    //           password: _passcontroller.text,
+                    //         )
+                    //         as String;
+                    // if (result == "Login Successful") {
+                    //   Fluttertoast.showToast(
+                    //     msg: result,
+                    //     toastLength: Toast.LENGTH_LONG,
+                    //     gravity: ToastGravity.BOTTOM,
+                    //     backgroundColor: Colors.greenAccent[100],
+                    //     textColor: Colors.green,
+                    //     fontSize: 20,
+                    //   );
+                    //   Navigator.pushNamed(context, '/home_page');
+                    // } else {
+                    //   Fluttertoast.showToast(
+                    //     msg: result,
+                    //     toastLength: Toast.LENGTH_LONG,
+                    //     gravity: ToastGravity.BOTTOM,
+                    //     backgroundColor: Colors.redAccent[100],
+                    //     textColor: Colors.red,
+                    //     fontSize: 20,
+                    //   );
+                    // }
+
                     Navigator.pushNamed(context, '/register_page');
                   },
                   style: TextButton.styleFrom(
@@ -179,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Expanded(child: Divider(color: Color(0xff878787))),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       "Or Sign in With",
                       style: TextStyle(

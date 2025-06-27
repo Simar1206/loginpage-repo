@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 class BottomModelScreen extends StatelessWidget {
   const BottomModelScreen({super.key});
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24),
-      margin: EdgeInsets.symmetric(vertical: 56),
+      margin: EdgeInsets.symmetric(vertical: 30),
       width: double.infinity,
-      height: 512,
+      //height: 700,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           //*Image
           Image.asset("assests/Illustrationsuccess.png"),
@@ -32,7 +31,7 @@ class BottomModelScreen extends StatelessWidget {
 
           //*Subheading
           Text(
-            "Password changed successfully, you can login \nagain with a new password",
+            "Password changed successfully, you can login again with a new password",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -47,7 +46,9 @@ class BottomModelScreen extends StatelessWidget {
           SizedBox(
             height: 52,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/login_page');
+              },
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),

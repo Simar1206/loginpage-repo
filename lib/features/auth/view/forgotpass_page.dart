@@ -11,8 +11,6 @@ class ForgotpassPage extends StatefulWidget {
 }
 
 class _ForgotpassPageState extends State<ForgotpassPage> {
- 
-
   final TextEditingController _emailcontroller = TextEditingController();
 
   void _bottommodelscr() {
@@ -44,10 +42,10 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Enter your email address and we'll send you \nconfirmation code to reset your password",
+                  "Enter your email address and we'll send you confirmation code to reset your password",
 
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0xff878787),
                   ),
@@ -80,7 +78,7 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
               ),
 
               //sizedbox
-              SizedBox(height: 161),
+              SizedBox(height: 80),
 
               //signup button
               SizedBox(

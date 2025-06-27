@@ -34,21 +34,47 @@ dependencies:
   carousel_slider: ^5.1.1
   fluttertoast: ^8.2.12
   google_fonts: ^6.2.1
+#  firebase_auth: ^5.6.0
+  flutter_native_splash: ^2.4.6
+
+  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+#  firebase_core: ^3.14.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
+    
+flutter_native_splash:
+  android: true # Set to true if you want to enable splash screen on Android
+  ios: true # Set to true if you want to enable splash screen on iOS
+  #color: "#FFC107" # Your splash screen background color (e.g., a dominant color from your gradient)
+  # or you can use a background image if you want the gradient
+  
+  # Optional: for dark mode
+  # color_dark: "#000000"
+  # image_dark: "assets/burgerbyte_dark.png"
+  # Optional: for Android 12+
+  android_12:
+  background_image: "assests/gradient.png" # If you pre-rendered your gradient as an image
+  image: "assests/burgerbyte.png" # Your logo image
+  fullscreen: true # Set to true if you want it full screen without system bars initially
+  #image: "assests/burgerbyte.png"
+  #   icon_background_color: "#FFC107"
+  #   icon_background_color_dark: "#000000"
+  #fullscreen: true # Set to true if you want it full screen without system bars initially
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+    
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
