@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/forgot_pass_page': (context) => ForgotpassPage(),
         '/on_boarding_screen': (context) => Onboardingscreen(),
       },
-      home: LoginPage(),
+      home: SplashScreen(),
     );
   }
 }
