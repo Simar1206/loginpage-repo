@@ -1,6 +1,10 @@
-import 'package:burgerapp/features/auth/view/forgotpass_page.dart';
-import 'package:burgerapp/features/auth/view/login_page.dart';
-import 'package:burgerapp/features/auth/view/register_page.dart';
+import 'package:burgerapp/Screens/Chat%20Page/chat_page.dart';
+import 'package:burgerapp/Screens/Personal%20Details/personal_details.dart';
+import 'package:burgerapp/Screens/cart/cart_page.dart';
+import 'package:burgerapp/Screens/home/homepage.dart';
+import 'package:burgerapp/Screens/forgotpassword/forgotpass_page.dart';
+import 'package:burgerapp/Screens/loginScreen/login_page.dart';
+import 'package:burgerapp/Screens/RegisterScreen/register_page.dart';
 import 'package:burgerapp/onboardingscreen/onboardingscreen.dart';
 import 'package:burgerapp/splash_screen.dart';
 
@@ -25,8 +29,13 @@ class MyApp extends StatelessWidget {
         '/register_page': (context) => RegisterPage(),
         '/forgot_pass_page': (context) => ForgotpassPage(),
         '/on_boarding_screen': (context) => Onboardingscreen(),
+        '/splash_screen': (context) => SplashScreen(),
+        '/home_page': (context) => Homepage(),
+        '/cart_page': (context) => CartPage(),
+        '/chat_page': (context) => ChatPage(),
+        '/personal_details_page': (context) => PersonalDetails(),
       },
-      home: SplashScreen(),
+      home: Homepage(),
     );
   }
 }
