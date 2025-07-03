@@ -16,7 +16,7 @@ class Homeheader extends StatelessWidget {
         image: DecorationImage(
           image: AssetImage(
             'assests/homebackground2.png',
-          ), // ✅ make sure spelling is correct
+          ),
           fit: BoxFit.cover,
         ),
       ),

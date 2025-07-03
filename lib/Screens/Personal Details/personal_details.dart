@@ -8,7 +8,7 @@ class PersonalDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text("PErsonal Details"),
+        title: Text("Personal Details"),
       ),
     );
   }

@@ -1,6 +1,8 @@
+import 'package:burgerapp/Screens/home/Category%20Section/category_tile.dart';
 import 'package:burgerapp/Screens/home/homeheader.dart';
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/auth/widgets/dropdown.dart';
+import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +20,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff5f5f5),
+      //*BOTTOM NAV BAR
+      bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,8 +30,48 @@ class _HomepageState extends State<Homepage> {
             //*HEADER
             Homeheader(),
 
-            //*BOTTOM NAVIGATION BAR
-            Align(alignment: Alignment.bottomCenter, child: Bottomnavbar()),
+            //*Sized Box
+            SizedBox(height: 44),
+
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: [
+                  //*Category Section
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Find by Category",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: ConstantColors.primarycolor,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //*TabBar
+
+                  //*Sizedbox
+                  SizedBox(height: 16),
+
+                  //* Find by category Tile Section
+                  SizedBox(height: 100, child: CategoryTile()),
+
+                  //* GridView With Cards.
+                  
+                ],
+              ),
+            ),
           ],
         ),
       ),

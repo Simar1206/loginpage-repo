@@ -91,6 +91,26 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assests/
+    - assests/tiles/
+    - assests/tiles/drinktile.png
+    - assests/tiles/burgertile.png
+    - assests/tiles/pizzatile.png
+    - assests/tiles/tacotile.png
+    - assests/productcard/Like.png
+    - assests/productcard/burger1.png
+    - assests/productcard/burger2.png
+    - assests/productcard/burger3.png
+    - assests/productcard/burger4.png
+    
+
+  fonts:
+    - family: OpenSans # This is the family name you'll use in your TextStyle
+      fonts:
+        - asset: assests/fonts/OpenSans_Condensed-Regular.ttf # Path to your regular font file
+        - asset: assests/fonts/OpenSans_SemiCondensed-Bold.ttf    # Path to your bold font file
+          weight: 700 
+        - asset: assests/fonts/OpenSans_Condensed-SemiBold.ttf    # Path to your bold font file
+          weight: 500          
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

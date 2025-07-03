@@ -21,35 +21,41 @@ class Bottomnavbar extends StatelessWidget {
         elevation: 2,
         currentIndex: bottomnavbar.current.value,
         selectedItemColor: ConstantColors.primarycolor,
-        unselectedItemColor: Color(0xff878787),
+        unselectedItemColor: ConstantColors.greycolor,
         onTap: (index) {
           bottomnavbar.setindex(index);
           switch (index) {
             case 0:
-              Get.to('/home_page');
+              Get.toNamed('/home_page');
               break;
             case 1:
-              Get.to('/cart_page');
+              Get.toNamed('/cart_page');
               break;
             case 2:
-              Get.to('/chat_page');
+              Get.toNamed('/chat_page');
               break;
             case 3:
-              Get.to('/personal_details_page');
+              Get.toNamed('/personal_details_page');
               break;
           }
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.home, size: 24),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag, size: 24),
             label: "Cart",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message_rounded),
+            icon: Icon(Icons.message_rounded, size: 24),
             label: "Chat",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person, size: 24),
+            label: "Profile",
+          ),
         ],
       ),
     );
