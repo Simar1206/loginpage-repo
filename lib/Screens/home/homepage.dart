@@ -1,5 +1,6 @@
 import 'package:burgerapp/Screens/home/Category%20Section/category_tile.dart';
 import 'package:burgerapp/Screens/home/homeheader.dart';
+import 'package:burgerapp/Screens/home/productgrid.dart';
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/auth/widgets/dropdown.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
@@ -67,8 +68,11 @@ class _HomepageState extends State<Homepage> {
                   //* Find by category Tile Section
                   SizedBox(height: 100, child: CategoryTile()),
 
+                  //*SizedBox
+                  SizedBox(height: 16),
+
                   //* GridView With Cards.
-                  
+                  Productgrid(),
                 ],
               ),
             ),
