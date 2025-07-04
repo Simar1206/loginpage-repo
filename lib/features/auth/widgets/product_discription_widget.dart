@@ -137,7 +137,7 @@ class ProductDiscriptionWidget extends StatelessWidget {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color(0xfff5f5f5),
+                            color: Color(0xffffefd6),
                           ),
 
                           child: Row(
