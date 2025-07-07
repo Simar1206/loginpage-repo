@@ -8,6 +8,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -107,7 +108,7 @@ class CartPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/home_page');
                       },
-
+                      
                       label: Text("Find Foods"),
                     ),
                   ),
