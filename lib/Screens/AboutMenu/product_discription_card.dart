@@ -1,4 +1,5 @@
-import 'package:burgerapp/features/auth/widgets/product_discription_widget.dart';
+import 'package:burgerapp/Screens/AboutMenu/product_discription_screen.dart';
+import 'package:burgerapp/features/auth/widgets/favoriteiconwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,8 +22,12 @@ class ProductDiscriptionCard extends StatelessWidget {
   final doubleformatter = NumberFormat('#,##0');
 
   //*height and width for container
-  double heightcontainer = 207;
-  double widthcontainer = 160;
+  double heightcontainer = double.infinity;
+  double widthcontainer = double.infinity;
+
+  //* snackbar
+  final snackbarforfalse = SnackBar(content: Text("Add to Favorites"));
+  final snackbarfortrue = SnackBar(content: Text('Removed from Favorites'));
 
   ProductDiscriptionCard({
     required this.imageurl,
@@ -52,8 +57,8 @@ class ProductDiscriptionCard extends StatelessWidget {
         );
       },
       child: Container(
-        height: heightcontainer,
-        width: widthcontainer,
+        // height: heightcontainer,
+        // width: widthcontainer,
         padding: EdgeInsets.all(8),
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -70,24 +75,15 @@ class ProductDiscriptionCard extends StatelessWidget {
                   width: double.maxFinite,
                   child: Image.asset(
                     imageurl,
-                    height: 106,
+                    height: 110,
+                    width: 137,
                     fit: BoxFit.contain,
                   ),
                 ),
 
                 Align(
                   alignment: Alignment.topRight,
-                  child: Container(
-                    margin: EdgeInsets.all(8),
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assests/productcard/Like.png'),
-                        // fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
+                  child: Favoriteiconwidget(),
                 ),
               ],
             ),

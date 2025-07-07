@@ -1,4 +1,5 @@
 import 'package:burgerapp/Screens/Chat%20Page/chat_page.dart';
+import 'package:burgerapp/Screens/Favorite%20Search%20Page/favorite_search_page.dart';
 import 'package:burgerapp/Screens/Personal%20Details/personal_details.dart';
 import 'package:burgerapp/Screens/cart/cart_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/drinks_page.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/drink_page': (context) => DrinksPage(),
         '/pizza_page': (context) => PizzaPage(),
         '/cart_page_': (context) => CartPage(),
+        '/favorite_search_page': (context) => FavoriteSearchPage(),
       },
       home: Homepage(),
     );
