@@ -1,5 +1,6 @@
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
+import 'package:burgerapp/features/topbarwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -20,40 +21,10 @@ class CartPageEmpty extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //back
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: ConstantColors.greycolor),
-                        ),
-                        child: Icon(Icons.arrow_back_ios, size: 20),
-                      ),
-                      //my cart
-                      const Text(
-                        'My Cart',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      //three dots
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: ConstantColors.greycolor),
-                        ),
-                        child: Icon(Icons.more_horiz_outlined, size: 20),
-                      ),
-                    ],
+                  Topbarwidget(
+                    firsticon: Icon(Icons.arrow_back_ios, size: 20),
+                    lasticon: Icon(Icons.more_horiz_outlined, size: 20),
+                    title: 'My Cart',
                   ),
                   const SizedBox(height: 74),
 

@@ -1,4 +1,5 @@
 import 'package:burgerapp/features/auth/widgets/signinwidget.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -138,70 +139,24 @@ class _LoginPageState extends State<LoginPage> {
               //sized box:
               // SizedBox(height: 25),
               //signup button
-              SizedBox(
-                height: 52,
-                child: TextButton(
-                  onPressed: () {
-                    if (_emailcontroller.text.isEmpty ||
-                        _passcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Fill all the fields",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.redAccent[100],
-                        textColor: Colors.red,
-                        fontSize: 20,
-                      );
-                      return;
-                    }
-                    // AuthServices auth = AuthServices();
-                    // String result =
-                    //     auth.login(
-                    //           email: _emailcontroller.text,
-                    //           password: _passcontroller.text,
-                    //         )
-                    //         as String;
-                    // if (result == "Login Successful") {
-                    //   Fluttertoast.showToast(
-                    //     msg: result,
-                    //     toastLength: Toast.LENGTH_LONG,
-                    //     gravity: ToastGravity.BOTTOM,
-                    //     backgroundColor: Colors.greenAccent[100],
-                    //     textColor: Colors.green,
-                    //     fontSize: 20,
-                    //   );
-                    //   Navigator.pushNamed(context, '/home_page');
-                    // } else {
-                    //   Fluttertoast.showToast(
-                    //     msg: result,
-                    //     toastLength: Toast.LENGTH_LONG,
-                    //     gravity: ToastGravity.BOTTOM,
-                    //     backgroundColor: Colors.redAccent[100],
-                    //     textColor: Colors.red,
-                    //     fontSize: 20,
-                    //   );
-                    // }
+              TextbuttonWidget(
+                buttontitle: 'Sign In',
+                buttonOnpress: () {
+                  if (_emailcontroller.text.isEmpty ||
+                      _passcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Fill all the fields",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.redAccent[100],
+                      textColor: Colors.red,
+                      fontSize: 20,
+                    );
+                    return;
+                  }
 
-                    Navigator.pushNamed(context, '/register_page');
-                  },
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    backgroundColor: ConstantColors.primarycolor,
-                  ),
-
-                  child: Center(
-                    child: Text(
-                      "Sign In",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: ConstantColors.headlinecolor,
-                      ),
-                    ),
-                  ),
-                ),
+                  Navigator.pushNamed(context, '/register_page');
+                },
               ),
 
               //sizedbox

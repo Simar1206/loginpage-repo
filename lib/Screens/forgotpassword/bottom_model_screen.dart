@@ -1,4 +1,4 @@
-import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:flutter/material.dart';
 
 class BottomModelScreen extends StatelessWidget {
@@ -43,30 +43,11 @@ class BottomModelScreen extends StatelessWidget {
           //*SizedBox
           SizedBox(height: 32),
 
-          SizedBox(
-            height: 52,
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login_page');
-              },
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                backgroundColor: ConstantColors.primarycolor,
-              ),
-
-              child: Center(
-                child: Text(
-                  "Verify Account",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: ConstantColors.headlinecolor,
-                  ),
-                ),
-              ),
-            ),
+          TextbuttonWidget(
+            buttontitle: 'Verify Account',
+            buttonOnpress: () {
+              Navigator.pushNamed(context, 'login_page');
+            },
           ),
         ],
       ),

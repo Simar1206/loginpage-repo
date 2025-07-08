@@ -12,7 +12,7 @@ class FavoriteSearchPage extends StatefulWidget {
 
 class _FavoriteSearchPageState extends State<FavoriteSearchPage> {
   //is empty condition
-  bool _isEmpty = true;
+  final bool _isEmpty = true;
 
   @override
   Widget build(BuildContext context) {

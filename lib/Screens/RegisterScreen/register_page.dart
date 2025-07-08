@@ -1,4 +1,5 @@
 import 'package:burgerapp/features/auth/widgets/signinwidget.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -224,44 +225,25 @@ class _RegisterPageState extends State<RegisterPage> {
               //*sized box
               SizedBox(height: 24),
               //*signup button
-              SizedBox(
-                height: 52,
-                child: TextButton(
-                  onPressed: () {
-                    if (_emailcontroller.text.isEmpty ||
-                        _passcontroller.text.isEmpty ||
-                        _usernamecontroller.text.isEmpty ||
-                        val == false) {
-                      Fluttertoast.showToast(
-                        msg: "Please fill in all the fields",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.redAccent[100],
-                        textColor: Colors.red,
-                        fontSize: 20,
-                      );
-                      return;
-                    }
-                    Navigator.pushNamed(context, '/login_page');
-                  },
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    backgroundColor: ConstantColors.primarycolor,
-                  ),
-
-                  child: Center(
-                    child: Text(
-                      "Register",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: ConstantColors.headlinecolor,
-                      ),
-                    ),
-                  ),
-                ),
+              TextbuttonWidget(
+                buttontitle: 'Register',
+                buttonOnpress: () {
+                  if (_emailcontroller.text.isEmpty ||
+                      _passcontroller.text.isEmpty ||
+                      _usernamecontroller.text.isEmpty ||
+                      val == false) {
+                    Fluttertoast.showToast(
+                      msg: "Please fill in all the fields",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.redAccent[100],
+                      textColor: Colors.red,
+                      fontSize: 20,
+                    );
+                    return;
+                  }
+                  Navigator.pushNamed(context, '/login_page');
+                },
               ),
 
               //sizedbox

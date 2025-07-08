@@ -1,7 +1,9 @@
 import 'package:burgerapp/Screens/Chat%20Page/chat_page.dart';
 import 'package:burgerapp/Screens/Favorite%20Search%20Page/favorite_search_page.dart';
 import 'package:burgerapp/Screens/Personal%20Details/personal_details.dart';
+import 'package:burgerapp/Screens/cart/cart_controller.dart';
 import 'package:burgerapp/Screens/cart/cart_page.dart';
+import 'package:burgerapp/Screens/cart/cart_page_empty.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/drinks_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/pizza_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/taco_page.dart';
@@ -13,11 +15,14 @@ import 'package:burgerapp/onboardingscreen/onboardingscreen.dart';
 import 'package:burgerapp/splash_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(CartController());
+
   runApp(MyApp());
 }
 
@@ -42,9 +47,13 @@ class MyApp extends StatelessWidget {
         '/taco_page': (context) => TacoPage(),
         '/drink_page': (context) => DrinksPage(),
         '/pizza_page': (context) => PizzaPage(),
-        '/cart_page_': (context) => CartPage(),
         '/favorite_search_page': (context) => FavoriteSearchPage(),
       },
+      getPages: [
+        // ... define your routes, e.g.
+        GetPage(name: '/cart_page', page: () => CartPage()),
+        // ... other pages
+      ],
       home: Homepage(),
     );
   }

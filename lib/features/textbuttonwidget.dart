@@ -1,10 +1,15 @@
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 
-class Textbutton extends StatelessWidget {
+class TextbuttonWidget extends StatelessWidget {
   final String buttontitle;
+  final VoidCallback buttonOnpress;
 
-  const Textbutton({required this.buttontitle, super.key});
+  const TextbuttonWidget({
+    required this.buttontitle,
+    required this.buttonOnpress,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class Textbutton extends StatelessWidget {
       height: 52,
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/login_page');
+          buttonOnpress;
         },
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(

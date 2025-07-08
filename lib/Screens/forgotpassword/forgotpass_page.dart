@@ -1,4 +1,5 @@
 import 'package:burgerapp/Screens/forgotpassword/bottom_model_screen.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -81,41 +82,22 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
               SizedBox(height: 80),
 
               //signup button
-              SizedBox(
-                height: 52,
-                child: TextButton(
-                  onPressed: () {
-                    if (_emailcontroller.text.isEmpty) {
-                      Fluttertoast.showToast(
-                        msg: "Enter Email Address.",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.redAccent[100],
-                        textColor: Colors.red,
-                        fontSize: 20,
-                      );
-                      return;
-                    }
-                    _bottommodelscr();
-                  },
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    backgroundColor: ConstantColors.primarycolor,
-                  ),
-
-                  child: Center(
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        color: ConstantColors.headlinecolor,
-                      ),
-                    ),
-                  ),
-                ),
+              TextbuttonWidget(
+                buttontitle: 'Continue',
+                buttonOnpress: () {
+                  if (_emailcontroller.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Enter Email Address.",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.redAccent[100],
+                      textColor: Colors.red,
+                      fontSize: 20,
+                    );
+                    return;
+                  }
+                  _bottommodelscr();
+                },
               ),
 
               //sizedbox

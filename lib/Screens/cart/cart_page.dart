@@ -1,122 +1,228 @@
+import 'package:burgerapp/Screens/cart/cardwidget.dart';
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
+import 'package:burgerapp/features/topbarwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:burgerapp/Screens/cart/cart_controller.dart';
 
-class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+class LocationController extends GetxController {
+  final currentlocation = 'mulund'.obs;
+
+  final List<String> location = [
+    'mulund',
+    'thane',
+    'bhandup',
+    'kanjur',
+    'vidyavihar',
+    'ghatkopar',
+    'vikhroli',
+    'kurla',
+  ];
+
+  void setlocation(String index) {
+    currentlocation.value = index;
+  }
+}
+
+class CartPage extends StatefulWidget {
+  //*obj for locationcontroller class
+  LocationController controllerlocation = Get.put(LocationController());
+  //*list of location
+
+  CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageNotEmptyState();
+}
+
+class _CartPageNotEmptyState extends State<CartPage> {
+  static const String hinttext = 'Promo Code. . .';
+  final double heightTxtfiels = 52.0;
+  //!define cartController here
+  final CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 44),
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.only(top: 41),
+          child: Column(
+            children: [
+              //* top Widget
+              Topbarwidget(
+                firsticon: Icon(Icons.arrow_back_ios, size: 20),
+                lasticon: Icon(Icons.more_horiz_outlined, size: 20),
+                title: 'My Cart',
+              ),
+
+              //*SizedBox
+              const SizedBox(height: 19),
+
+              //*Set Location
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //* deliver Location + home
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      //back
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: ConstantColors.greycolor),
-                        ),
-                        child: Icon(Icons.arrow_back_ios, size: 20),
-                      ),
-                      //my cart
-                      const Text(
-                        'My Cart',
+                      Text(
+                        'Delivery Location',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: ConstantColors.greycolor,
                         ),
                       ),
-                      //three dots
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: ConstantColors.greycolor),
+
+                      Obx(
+                        () => Text(
+                          widget.controllerlocation.currentlocation.value,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
                         ),
-                        child: Icon(Icons.more_horiz_outlined, size: 20),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 74),
-
-                  Image.asset(
-                    'assests/favoritepage.png',
-                    width: 278,
-                    height: 207,
-                  ),
-
-                  const SizedBox(height: 56),
-
-                  Text(
-                    "Ouch! Hungry",
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    "Seems like you have not ordered\nany food yet",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                      color: ConstantColors.greycolor,
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: TextButton.icon(
-                      style: ButtonStyle(
-                        minimumSize: WidgetStateProperty.all(
-                          Size(double.infinity, 52),
-                        ),
-                        textStyle: WidgetStateProperty.all(
-                          TextStyle(
-                            fontSize: 14,
-                            color: ConstantColors.headlinecolor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        foregroundColor: WidgetStateProperty.all(
-                          ConstantColors.headlinecolor,
-                        ),
-                        backgroundColor: WidgetStateProperty.all(
-                          ConstantColors.primarycolor,
-                        ),
-                        alignment: Alignment.center,
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(100),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home_page');
-                      },
-                      
-                      label: Text("Find Foods"),
-                    ),
-                  ),
+                  //*change location button
+                  ChangeLocationButton(widget: widget),
                 ],
               ),
-            ),
-          ],
+              //* sizedbox
+              SizedBox(height: 24),
+
+              //*PromoCode
+              SizedBox(
+                width: double.infinity,
+                height: heightTxtfiels,
+                child: TextField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: BorderSide(color: Color(0xffEDEDED)),
+                    ),
+
+                    //*hint text
+                    hintText: 'Promo Code. . .',
+                    hintStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xffC2C2C2),
+                    ),
+                    //*prefix Icon
+                    prefixIcon: Image.asset(
+                      'assests/discounticon.png',
+                      width: 25,
+                      height: 25,
+                    ),
+                    //*Suffix Icon
+                    suffixIcon: ApplytextButton(),
+                  ),
+                ),
+              ),
+              //*SizedBox
+              SizedBox(height: 24),
+
+              //*cards
+              //! observable var
+              GetX<CartController>(
+                builder: (controller) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller
+                        .cartItems
+                        .length, // Access controller directly
+                    itemBuilder: (context, index) {
+                      final product = controller.cartItems[index];
+                      return Cardwidget(ProductDiscriptionCardObj: product);
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+/// *********************************************************************************************************************************
+class ApplytextButton extends StatelessWidget {
+  const ApplytextButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+      child: SizedBox(
+        height: 36,
+        width: 86,
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            ),
+            backgroundColor: ConstantColors.primarycolor,
+          ),
+
+          child: Center(
+            child: Text(
+              'Apply ',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                color: ConstantColors.headlinecolor,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ChangeLocationButton extends StatelessWidget {
+  const ChangeLocationButton({super.key, required this.widget});
+
+  final CartPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: ConstantColors.primarycolor),
+      ),
+      child: DropdownButton<String>(
+        icon: SizedBox.shrink(),
+        //remove the underline
+        underline: const SizedBox.shrink(),
+
+        hint: const Text(
+          'Change Location',
+          style: TextStyle(fontSize: 10, color: ConstantColors.primarycolor),
+        ),
+        //value: widget.controllerlocation.currentlocation.value,
+        items: widget.controllerlocation.location
+            .map((loc) => DropdownMenuItem(value: loc, child: Text(loc)))
+            .toList(),
+        onChanged: (newloc) {
+          if (newloc != null) {
+            widget.controllerlocation.setlocation(newloc);
+          }
+        },
       ),
     );
   }

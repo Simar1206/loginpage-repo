@@ -1,3 +1,5 @@
+import 'package:burgerapp/Screens/cart/cart_controller.dart';
+import 'package:burgerapp/features/textbuttonwithicon.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:burgerapp/Screens/AboutMenu/product_discription_card.dart';
@@ -15,7 +17,9 @@ class CounterForProduct extends GetxController {
 
 class ProductDiscriptionWidget extends StatelessWidget {
   //*Obj for the above class
-  CounterForProduct countercontroller = CounterForProduct();
+  CounterForProduct countercontroller = Get.put(CounterForProduct());
+  //! get obj of cart controller
+  final CartController cartController = Get.find<CartController>();
 
   //*inc function
   void _inc() {
@@ -46,7 +50,10 @@ class ProductDiscriptionWidget extends StatelessWidget {
     final fourtysevenpercentsize = screensize * 0.47;
     return SafeArea(
       child: Scaffold(
-        bottomSheet: AddtoCartButton(),
+        //! pass thr product to the cart
+        bottomSheet: AddtoCartButton(
+          productDiscriptionObj: productDiscriptionCardObj,
+        ),
         body: Stack(
           children: [
             //*background Image
@@ -332,38 +339,24 @@ class FavoriteIcon extends StatelessWidget {
 }
 
 class AddtoCartButton extends StatelessWidget {
-  const AddtoCartButton({super.key});
+  //! recieve obj of product discription
+  final ProductDiscriptionCard productDiscriptionObj;
+  const AddtoCartButton({super.key, required this.productDiscriptionObj});
 
   @override
   Widget build(BuildContext context) {
+    //!defined a cartcontroller and using Get.find() we find the controller.
+    final CartController cartController = Get.find();
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: TextButton.icon(
-        style: ButtonStyle(
-          minimumSize: WidgetStateProperty.all(Size(double.infinity, 50)),
-          textStyle: WidgetStateProperty.all(
-            TextStyle(
-              fontSize: 14,
-              color: ConstantColors.headlinecolor,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          foregroundColor: WidgetStateProperty.all(
-            ConstantColors.headlinecolor,
-          ),
-          backgroundColor: WidgetStateProperty.all(ConstantColors.primarycolor),
-          alignment: Alignment.center,
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(100),
-            ),
-          ),
-        ),
-        onPressed: () {
-          Get.toNamed('/cart_page_');
+      child: Textbuttonwithicon(
+        buttonOnPress: () {
+          //!when button pushed obj added to cart
+          cartController.AddtoCart(productDiscriptionObj);
+          Get.toNamed('/cart_page');
         },
-        icon: Icon(Icons.shopping_cart_outlined, size: 20),
-        label: Text("Add to Cart"),
+        buttontitle: 'Add to cart',
+        buttonicon: Icon(Icons.shopping_cart_outlined),
       ),
     );
   }
