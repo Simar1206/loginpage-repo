@@ -3,6 +3,7 @@ import 'package:burgerapp/Screens/cart/cart_controller.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CounterController extends GetxController {
   final currentquantity = 1.obs;
@@ -23,31 +24,57 @@ class Cardwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //* number formatter
+    final doubleformatter = NumberFormat('#,##0');
+    //* size of image
+    const double heightImage = 82;
+    const double widthImage = 85;
+
     //!define remove from cart
-    void _showsnackbar(bool? value) {
+    void showsnackbar(bool? value) {
       if (value == false) {
         cartController.RemovefromCart(
           ProductDiscriptionCardObj,
         ); // Remove from cart
       }
-      const snackbar = SnackBar(content: Text("removed from the cart"));
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      // const snackbar = SnackBar(content: Text("removed from the cart"));
+      // ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
 
-    return  Card(
-        margin: EdgeInsets.all(12),
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(12),
-        ),
+    return Card(
+      //margin: EdgeInsets.all(12),
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             //*checkbox
-            Checkbox(value: false, onChanged: _showsnackbar),
+            Checkbox(
+              value: true,
+              onChanged: showsnackbar,
+              activeColor: ConstantColors.primarycolor,
+              checkColor: ConstantColors.headlinecolor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(4),
+              ),
+              side: BorderSide(width: 0),
+            ),
             //*image
-            Image.asset(ProductDiscriptionCardObj.imageurl),
+            Image.asset(
+              ProductDiscriptionCardObj.imageurl,
+              height: heightImage,
+              width: widthImage,
+            ),
+
+            //*SizedBox
+            const SizedBox(width: 16),
+
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //*card title
                 Text(
@@ -59,7 +86,7 @@ class Cardwidget extends StatelessWidget {
 
                 //*cardprice
                 Text(
-                  ProductDiscriptionCardObj.price.toString(),
+                  '\$ ${doubleformatter.format(ProductDiscriptionCardObj.price).toString()}',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
@@ -72,30 +99,35 @@ class Cardwidget extends StatelessWidget {
                 //*inc/dec/remove
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                   children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //*dec
-                          IncDecButtons(icons: Icon(Icons.remove)),
-                          //*quantity
-                          Obx(
-                            () => Text(
-                              controllercounter.currentquantity.value
-                                  .toString(),
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
+                    Row(
+                      children: [
+                        IncDecButtons(icons: Icon(Icons.remove, size: 12)),
+
+                        //*SIzedbox
+                        const SizedBox(width: 16),
+
+                        //*quantity
+                        Obx(
+                          () => Text(
+                            controllercounter.currentquantity.value.toString(),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          //*inc
-                          IncDecButtons(icons: Icon(Icons.add)),
-                        ],
-                      ),
+                        ),
+
+                        //*SIzedbox
+                        const SizedBox(width: 16),
+
+                        //*inc
+                        IncDecButtons(icons: Icon(Icons.add, size: 12)),
+                      ],
                     ),
+
+                    //*SizedBox
+                    const SizedBox(width: 54),
                     GestureDetector(
                       onTap: () {
                         cartController.RemovefromCart(
@@ -110,8 +142,11 @@ class Cardwidget extends StatelessWidget {
             ),
           ],
         ),
-      );
+      ),
+    );
   }
+
+  ///********************************************************************************************************************************************** */
 
   Container IncDecButtons({required Icon icons}) {
     return Container(
@@ -120,7 +155,7 @@ class Cardwidget extends StatelessWidget {
       height: 28,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: Color(0xffEDEDED),
+        border: Border.all(color: Color(0xffEDEDED)),
       ),
       child: icons,
     );

@@ -50,7 +50,7 @@ class ProductDiscriptionWidget extends StatelessWidget {
     final fourtysevenpercentsize = screensize * 0.47;
     return SafeArea(
       child: Scaffold(
-        //! pass thr product to the cart
+        //! pass the product to the cart
         bottomSheet: AddtoCartButton(
           productDiscriptionObj: productDiscriptionCardObj,
         ),
@@ -353,7 +353,7 @@ class AddtoCartButton extends StatelessWidget {
         buttonOnPress: () {
           //!when button pushed obj added to cart
           cartController.AddtoCart(productDiscriptionObj);
-          Get.toNamed('/cart_page');
+          Navigator.pushNamed(context, '/cart_page');
         },
         buttontitle: 'Add to cart',
         buttonicon: Icon(Icons.shopping_cart_outlined),

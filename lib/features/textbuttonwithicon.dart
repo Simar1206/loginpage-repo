@@ -1,7 +1,6 @@
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class Textbuttonwithicon extends StatelessWidget {
   final String buttontitle;
   final Icon buttonicon;
@@ -35,7 +34,7 @@ class Textbuttonwithicon extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        buttonOnPress;
+        buttonOnPress();
       },
       icon: buttonicon,
       label: Text(buttontitle),

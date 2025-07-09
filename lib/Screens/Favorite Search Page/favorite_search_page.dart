@@ -1,7 +1,5 @@
-import 'package:burgerapp/Screens/AboutMenu/product_discription_card.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:burgerapp/features/auth/widgets/favoriteiconwidget.dart';
 
 class FavoriteSearchPage extends StatefulWidget {
   const FavoriteSearchPage({super.key});

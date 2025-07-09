@@ -6,7 +6,7 @@ class Topbarwidget extends StatelessWidget {
   final Icon lasticon;
   final String title;
 
-  Topbarwidget({
+  const Topbarwidget({
     required this.firsticon,
     required this.lasticon,
     required this.title,

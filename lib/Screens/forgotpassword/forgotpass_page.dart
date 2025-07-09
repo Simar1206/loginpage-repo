@@ -1,6 +1,5 @@
 import 'package:burgerapp/Screens/forgotpassword/bottom_model_screen.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
-import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

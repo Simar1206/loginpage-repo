@@ -1,6 +1,5 @@
 import 'package:burgerapp/Screens/cart/cardwidget.dart';
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
-import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/features/topbarwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,7 @@ class _CartPageNotEmptyState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: ,
       bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
         child: Container(
@@ -133,21 +133,35 @@ class _CartPageNotEmptyState extends State<CartPage> {
 
               //*cards
               //! observable var
-              GetX<CartController>(
-                builder: (controller) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: controller
-                        .cartItems
-                        .length, // Access controller directly
-                    itemBuilder: (context, index) {
-                      final product = controller.cartItems[index];
-                      return Cardwidget(ProductDiscriptionCardObj: product);
-                    },
-                  );
-                },
+              Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: cartController
+                      .cartItems
+                      .length, // Access controller directly
+                  itemBuilder: (context, index) {
+                    final product = cartController.cartItems[index]; //cartItems is a obs list of productDescriptionCard
+                    return Cardwidget(ProductDiscriptionCardObj: product);
+                  },
+                  ),
               ),
+
+              //*SizedBox
+              const SizedBox(height: 40,),
+
+              //*Information Payment
+              InformationPayment()
+
+
+
+
+
+
+
+
+
+
             ],
           ),
         ),
@@ -156,7 +170,51 @@ class _CartPageNotEmptyState extends State<CartPage> {
   }
 }
 
+
+
 /// *********************************************************************************************************************************
+
+class InformationPayment extends StatelessWidget {
+  const InformationPayment({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      width: 327,
+      height: 184,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Color(0xffEDEDED),
+        )
+
+      ),
+      child: Column(
+        children: [
+          //*header
+          Text('Payment Summary', style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+
+          ),),
+          //*SizedBoc
+          const SizedBox(height: 8,),
+
+          //*Total Items;
+          Row(
+            children: [
+              const Text('Total Items')
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class ApplytextButton extends StatelessWidget {
   const ApplytextButton({super.key});
 
