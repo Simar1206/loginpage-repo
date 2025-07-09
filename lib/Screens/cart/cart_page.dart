@@ -5,6 +5,7 @@ import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:burgerapp/Screens/cart/cart_controller.dart';
+import 'package:intl/intl.dart';
 
 class LocationController extends GetxController {
   final currentlocation = 'mulund'.obs;
@@ -37,6 +38,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageNotEmptyState extends State<CartPage> {
+  //*number formatter
+
   static const String hinttext = 'Promo Code. . .';
   final double heightTxtfiels = 52.0;
   //!define cartController here
@@ -45,7 +48,7 @@ class _CartPageNotEmptyState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: ,
+      //bottomSheet: ,
       bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
         child: Container(
@@ -71,7 +74,7 @@ class _CartPageNotEmptyState extends State<CartPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Delivery Location',
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -111,7 +114,7 @@ class _CartPageNotEmptyState extends State<CartPage> {
                     ),
 
                     //*hint text
-                    hintText: 'Promo Code. . .',
+                    hintText: hinttext,
                     hintStyle: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
@@ -128,40 +131,32 @@ class _CartPageNotEmptyState extends State<CartPage> {
                   ),
                 ),
               ),
+
               //*SizedBox
               SizedBox(height: 24),
 
               //*cards
               //! observable var
-              Obx(
-                () => ListView.builder(
+              Obx(() {
+                final productsInCart = cartController.cartItems.keys.toList();
+                return ListView.builder(
+                  padding: EdgeInsets.only(top: 0),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: cartController
-                      .cartItems
-                      .length, // Access controller directly
+                  itemCount: productsInCart.length,
                   itemBuilder: (context, index) {
-                    final product = cartController.cartItems[index]; //cartItems is a obs list of productDescriptionCard
+                    final product =
+                        productsInCart[index]; //cartItems is a obs list of productDescriptionCard
                     return Cardwidget(ProductDiscriptionCardObj: product);
                   },
-                  ),
-              ),
+                );
+              }),
 
               //*SizedBox
-              const SizedBox(height: 40,),
+              const SizedBox(height: 40),
 
               //*Information Payment
-              InformationPayment()
-
-
-
-
-
-
-
-
-
-
+              InformationPayment(),
             ],
           ),
         ),
@@ -170,45 +165,65 @@ class _CartPageNotEmptyState extends State<CartPage> {
   }
 }
 
-
-
 /// *********************************************************************************************************************************
 
 class InformationPayment extends StatelessWidget {
-  const InformationPayment({
-    super.key,
-  });
+  final CartController cartController = Get.find<CartController>();
+  InformationPayment({super.key});
 
   @override
   Widget build(BuildContext context) {
+    NumberFormat doubleformatter = NumberFormat('#,##0');
     return Container(
       padding: EdgeInsets.all(12),
-      width: 327,
+      width: double.maxFinite,
       height: 184,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Color(0xffEDEDED),
-        )
-
+        border: Border.all(color: Color(0xffEDEDED)),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //*header
-          Text('Payment Summary', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-
-          ),),
+          const Text(
+            'Payment Summary',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
           //*SizedBoc
-          const SizedBox(height: 8,),
+          const SizedBox(height: 8),
 
           //*Total Items;
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Total Items')
+              Row(
+                children: [
+                  //*displaying the number of items/tiles
+                  const Text(
+                    'Total Items ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff878787),
+                    ),
+                  ),
+                  Obx(
+                    () =>
+                        Text('(${cartController.cartItems.length.toString()})'),
+                  ),
+                ],
+              ),
+              //*displaying the total cost
+              Obx(
+                () => Text(
+                  doubleformatter.format(cartController.totalCost),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

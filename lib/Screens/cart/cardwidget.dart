@@ -6,21 +6,39 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CounterController extends GetxController {
-  final currentquantity = 1.obs;
+  var currentquantity = 1.obs;
 
   void setindex(int index) {
     currentquantity.value = index;
   }
 }
 
-class Cardwidget extends StatelessWidget {
+class Cardwidget extends StatefulWidget {
+  final ProductDiscriptionCard ProductDiscriptionCardObj;
+  const Cardwidget({super.key, required this.ProductDiscriptionCardObj});
+
+  @override
+  State<Cardwidget> createState() => _CardwidgetState();
+}
+
+class _CardwidgetState extends State<Cardwidget> {
   //*obj of the counter controller class
-  final CounterController controllercounter = Get.put(CounterController());
+  final CartController controllercounter = Get.find();
+  //*countercontroller for card:
+  void IncrementCounter() {
+    controllercounter.IncrementProductQuantity(
+      //! cange from local current-- to global changes
+      widget.ProductDiscriptionCardObj,
+    );
+  }
+
+  void DecrementCounter() {
+    //! These methods will now directly interact with the CartController
+    cartController.DecrementProductQuantity(widget.ProductDiscriptionCardObj);
+  }
+
   //!define cart controller here
   final CartController cartController = Get.find();
-  //*obj for the product description class
-  final ProductDiscriptionCard ProductDiscriptionCardObj;
-  Cardwidget({super.key, required this.ProductDiscriptionCardObj});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +52,7 @@ class Cardwidget extends StatelessWidget {
     void showsnackbar(bool? value) {
       if (value == false) {
         cartController.RemovefromCart(
-          ProductDiscriptionCardObj,
+          widget.ProductDiscriptionCardObj,
         ); // Remove from cart
       }
       // const snackbar = SnackBar(content: Text("removed from the cart"));
@@ -43,7 +61,7 @@ class Cardwidget extends StatelessWidget {
 
     return Card(
       //margin: EdgeInsets.all(12),
-      elevation: 3,
+      //elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(12),
       ),
@@ -65,7 +83,7 @@ class Cardwidget extends StatelessWidget {
             ),
             //*image
             Image.asset(
-              ProductDiscriptionCardObj.imageurl,
+              widget.ProductDiscriptionCardObj.imageurl,
               height: heightImage,
               width: widthImage,
             ),
@@ -78,7 +96,7 @@ class Cardwidget extends StatelessWidget {
               children: [
                 //*card title
                 Text(
-                  ProductDiscriptionCardObj.card_title,
+                  widget.ProductDiscriptionCardObj.card_title,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
 
@@ -86,7 +104,7 @@ class Cardwidget extends StatelessWidget {
 
                 //*cardprice
                 Text(
-                  '\$ ${doubleformatter.format(ProductDiscriptionCardObj.price).toString()}',
+                  '\$ ${doubleformatter.format(widget.ProductDiscriptionCardObj.price).toString()}',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
@@ -102,15 +120,27 @@ class Cardwidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        IncDecButtons(icons: Icon(Icons.remove, size: 12)),
+                        GestureDetector(
+                          onTap: DecrementCounter,
+                          child: IncDecButtons(
+                            icons: Icon(
+                              Icons.remove,
+                              size: 16,
+                              color: Color(0xff878787),
+                            ),
+                          ),
+                        ),
 
                         //*SIzedbox
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 12),
 
-                        //*quantity
+                        //!quantity (NOW READ FROM CARTCONTROLLER)
                         Obx(
                           () => Text(
-                            controllercounter.currentquantity.value.toString(),
+                            (cartController.cartItems[widget
+                                        .ProductDiscriptionCardObj] ??
+                                    0)
+                                .toString(),
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -119,19 +149,24 @@ class Cardwidget extends StatelessWidget {
                         ),
 
                         //*SIzedbox
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 12),
 
                         //*inc
-                        IncDecButtons(icons: Icon(Icons.add, size: 12)),
+                        GestureDetector(
+                          onTap: () => IncrementCounter(),
+                          child: IncDecButtons(
+                            icons: Icon(Icons.add, size: 16),
+                          ),
+                        ),
                       ],
                     ),
 
                     //*SizedBox
-                    const SizedBox(width: 54),
+                    const SizedBox(width: 44),
                     GestureDetector(
                       onTap: () {
                         cartController.RemovefromCart(
-                          ProductDiscriptionCardObj,
+                          widget.ProductDiscriptionCardObj,
                         );
                       },
                       child: Image.asset('assests/trashicon.png'),
@@ -150,14 +185,29 @@ class Cardwidget extends StatelessWidget {
 
   Container IncDecButtons({required Icon icons}) {
     return Container(
-      padding: EdgeInsets.all(8),
+      //padding: EdgeInsets.all(8),
+      // margin: EdgeInsets.all(8),
       width: 28,
       height: 28,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: Color(0xffEDEDED)),
+        border: Border.all(color: Colors.black12),
       ),
-      child: icons,
+      child: Center(child: icons),
     );
   }
 }
+
+/*Key Changes in this cardwidget.dart:
+
+CounterController Class Definition: Remains untouched at the top of the file.
+
+controllercounter Instance: The line final CounterController controllercounter = CounterController(); inside _CardwidgetState has been removed/commented out.
+
+New IncrementCartItem and DecrementCartItem Methods: These methods are added to _CardwidgetState and directly call the cartController's methods (incrementProductQuantity and decrementProductQuantity).
+
+Quantity Display in Obx: Now reads (cartController.cartItems[widget.ProductDiscriptionCardObj] ?? 0).toString(), ensuring it reflects the global cart quantity.
+
+onTap for Buttons: The GestureDetector onTap for the increment and decrement buttons now call IncrementCartItem and DecrementCartItem respectively.
+
+Price Formatting: Adjusted doubleformatter and price display to ensure consistent formatting (e.g., \$ ${doubleformatter.format(widget.ProductDiscriptionCardObj.price)}). */

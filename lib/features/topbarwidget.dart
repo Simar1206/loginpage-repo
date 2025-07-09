@@ -10,42 +10,50 @@ class Topbarwidget extends StatelessWidget {
     required this.firsticon,
     required this.lasticon,
     required this.title,
+
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        //back
-        Container(
-          padding: const EdgeInsets.all(8),
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(color: ConstantColors.greycolor),
+    return GestureDetector(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          //back
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/home_page');
+            },
+            child: Container(
+              //padding: const EdgeInsets.all(8),
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: ConstantColors.greycolor),
+              ),
+              child: Center(child: firsticon),
+            ),
           ),
-          child: firsticon,
-        ),
-        //my cart
-        Text(
-          title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-        //three dots
-        Container(
-          padding: const EdgeInsets.all(8),
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(color: ConstantColors.greycolor),
+          //my cart
+          Text(
+            title,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
-          child: lasticon,
-        ),
-      ],
+          //three dots
+          Container(
+            //padding: const EdgeInsets.all(8),
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: ConstantColors.greycolor),
+            ),
+            child: Center(child: lasticon),
+          ),
+        ],
+      ),
     );
   }
 }
