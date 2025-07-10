@@ -3,6 +3,7 @@ import 'package:burgerapp/Screens/Favorite%20Search%20Page/favorite_search_page.
 import 'package:burgerapp/Screens/Personal%20Details/personal_details.dart';
 import 'package:burgerapp/Screens/cart/cart_controller.dart';
 import 'package:burgerapp/Screens/cart/cart_page.dart';
+import 'package:burgerapp/Screens/cart/cart_page_empty.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/drinks_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/pizza_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/taco_page.dart';
@@ -19,13 +20,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(Discount());
   Get.put(CartController());
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final CartController cartController = Get.find<CartController>();
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +36,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
       debugShowCheckedModeBanner: false,
       routes: {
+        '/main_screen': (context) => MyApp(),
         '/login_page': (context) => LoginPage(),
         '/register_page': (context) => RegisterPage(),
         '/forgot_pass_page': (context) => ForgotpassPage(),
         '/on_boarding_screen': (context) => Onboardingscreen(),
         '/splash_screen': (context) => SplashScreen(),
         '/home_page': (context) => Homepage(),
-        '/cart_page': (context) => CartPage(),
+        '/cart_page': (context) {
+          if (cartController.cartItems.isEmpty) {
+            return CartPageEmpty();
+          } else {
+            return CartPage();
+          }
+        },
         '/chat_page': (context) => ChatPage(),
         '/personal_details_page': (context) => PersonalDetails(),
         '/taco_page': (context) => TacoPage(),
@@ -49,7 +59,7 @@ class MyApp extends StatelessWidget {
         // '/cart_page' : (context)=> CartPage(),
       },
 
-      home: Homepage(),
+      home: Onboardingscreen(),
     );
   }
 }

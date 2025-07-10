@@ -23,7 +23,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Color(0xfff5f5f5),
       //*BOTTOM NAV BAR
-      bottomNavigationBar: Bottomnavbar(),
+     bottomNavigationBar: Bottomnavbar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

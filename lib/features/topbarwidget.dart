@@ -5,12 +5,13 @@ class Topbarwidget extends StatelessWidget {
   final Icon firsticon;
   final Icon lasticon;
   final String title;
+  final VoidCallback onPress;
 
   const Topbarwidget({
     required this.firsticon,
     required this.lasticon,
     required this.title,
-
+    required this.onPress,
     super.key,
   });
 
@@ -23,7 +24,7 @@ class Topbarwidget extends StatelessWidget {
           //back
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, '/home_page');
+              onPress();
             },
             child: Container(
               //padding: const EdgeInsets.all(8),

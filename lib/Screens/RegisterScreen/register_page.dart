@@ -3,6 +3,7 @@ import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -242,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     );
                     return;
                   }
-                  Navigator.pushNamed(context, '/login_page');
+                  Get.toNamed('/home_page');
                 },
               ),
 

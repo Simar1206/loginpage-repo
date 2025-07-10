@@ -17,7 +17,7 @@ class TextbuttonWidget extends StatelessWidget {
       height: 52,
       child: TextButton(
         onPressed: () {
-          buttonOnpress;
+          buttonOnpress();
         },
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(

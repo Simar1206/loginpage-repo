@@ -1,4 +1,5 @@
 import 'package:burgerapp/Screens/cart/cart_controller.dart';
+import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/textbuttonwithicon.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
@@ -345,6 +346,8 @@ class AddtoCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //*controller for bottom nav
+    final Bottomnavbarclass bottomnavbar = Get.find<Bottomnavbarclass>();
     //!defined a cartcontroller and using Get.find() we find the controller.
     final CartController cartController = Get.find();
     return Padding(
@@ -353,6 +356,8 @@ class AddtoCartButton extends StatelessWidget {
         buttonOnPress: () {
           //!when button pushed obj added to cart
           cartController.AddtoCart(productDiscriptionObj);
+          //*change index of bottom nav
+          bottomnavbar.setindex(1);
           Navigator.pushNamed(context, '/cart_page');
         },
         buttontitle: 'Add to cart',
