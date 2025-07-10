@@ -12,6 +12,7 @@ import 'package:burgerapp/Screens/forgotpassword/forgotpass_page.dart';
 import 'package:burgerapp/Screens/loginScreen/login_page.dart';
 import 'package:burgerapp/Screens/RegisterScreen/register_page.dart';
 import 'package:burgerapp/onboardingscreen/onboardingscreen.dart';
+import 'package:burgerapp/settings/setting_page.dart';
 import 'package:burgerapp/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/drink_page': (context) => DrinksPage(),
         '/pizza_page': (context) => PizzaPage(),
         '/favorite_search_page': (context) => FavoriteSearchPage(),
+        '/settings_page' : (context) => SettingPage()
         // '/cart_page' : (context)=> CartPage(),
       },
 
