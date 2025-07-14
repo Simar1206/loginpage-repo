@@ -38,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.4.6
   get: ^4.7.2
   intl: ^0.20.2
+  phone_form_field: ^10.0.8
 
   
 
@@ -102,6 +103,8 @@ flutter:
     - assests/productcard/burger2.png
     - assests/productcard/burger3.png
     - assests/productcard/burger4.png
+   
+    
     
 
   fonts:

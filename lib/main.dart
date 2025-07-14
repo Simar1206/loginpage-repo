@@ -57,11 +57,11 @@ class MyApp extends StatelessWidget {
         '/drink_page': (context) => DrinksPage(),
         '/pizza_page': (context) => PizzaPage(),
         '/favorite_search_page': (context) => FavoriteSearchPage(),
-        '/settings_page' : (context) => SettingPage()
+        '/settings_page': (context) => SettingPage(),
         // '/cart_page' : (context)=> CartPage(),
       },
 
-      home: Onboardingscreen(),
+      home: Homepage(),
     );
   }
 }

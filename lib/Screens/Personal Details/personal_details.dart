@@ -1,45 +1,234 @@
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
+import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/features/topbarwidget.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
-class PersonalDetails extends StatelessWidget {
-  final String fieldtitle;
-  PersonalDetails({required this.fieldtitle, super.key});
+class PersonalDetails extends StatefulWidget {
+  PersonalDetails({super.key});
 
+  @override
+  State<PersonalDetails> createState() => _PersonalDetailsState();
+}
+
+class _PersonalDetailsState extends State<PersonalDetails> {
+  final Bottomnavbarclass bottomnavbar = Get.find<Bottomnavbarclass>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 44),
-        child: Column(
-          children: [
-            //********************************************top widget***************************************************************************************************
-            Topbarwidget(
-              firsticon: Icon(Icons.arrow_back_ios),
-              lasticon: Icon(Icons.settings_outlined),
-              title: 'Personal Date',
-              onPress: () {
-                Get.toNamed('/settings_page');
-              },
-            ),
+      bottomNavigationBar: Bottomnavbar(),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        child: TextbuttonWidget(buttontitle: 'Save', buttonOnpress: () {}),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 44),
+          child: Column(
+            children: [
+              //********************************************top widget***************************************************************************************************
+              Topbarwidget(
+                firsticon: Icon(Icons.arrow_back_ios),
+                lasticon: Icon(Icons.settings_outlined),
+                title: 'Personal Date',
+                onPress: () {
+                  bottomnavbar.setindex(0);
+                  Get.toNamed('/settings_page');
+                },
+              ),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            //******************************************** PROFILE PIC ***************************************************************************************************
-            ProfilePic(),
+              //******************************************** PROFILE PIC ***************************************************************************************************
+              ProfilePic(),
 
-            const SizedBox(height: 24),
+              const SizedBox(height: 24),
 
-            //******************************************** PROFILE PIC ***************************************************************************************************
-          ],
+              //******************************************** FIELDS ***************************************************************************************************
+
+              //*TITLE
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FieldTItle(fieldTitle: 'Full Name'),
+                  const SizedBox(height: 8),
+                  //*TXTFIELD
+                  FieldTextField(),
+                  const SizedBox(height: 12),
+
+                  //*TITLE
+                  FieldTItle(fieldTitle: 'date of Birth'),
+                  const SizedBox(height: 8),
+                  //*TXTFIELD
+                  DOBtextfieldWidget(),
+                  const SizedBox(height: 12),
+
+                  //*TITLE
+                  FieldTItle(fieldTitle: 'Gender'),
+                  const SizedBox(height: 8),
+                  //*TXTFIELD
+                  GenderWidget(),
+                  const SizedBox(height: 12),
+
+                  //*TITLE
+                  FieldTItle(fieldTitle: 'Phone'),
+                  const SizedBox(height: 8),
+                  //*TXTFIELD
+                  PhoneFormField(
+                    initialValue: PhoneNumber.parse('+91'),
+
+                    isCountrySelectionEnabled: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: ConstantColors.greycolor),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  //*TITLE
+                  FieldTItle(fieldTitle: 'Email'),
+                  const SizedBox(height: 8),
+                  //*TXTFIELD
+                  FieldTextField(),
+                  const SizedBox(height: 12),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
+//******************************************** Gender FIELD CLASS ***************************************************************************************************
+class GenderWidget extends StatefulWidget {
+  const GenderWidget({super.key});
+
+  @override
+  State<GenderWidget> createState() => _GenderWidgetState();
+}
+
+class _GenderWidgetState extends State<GenderWidget> {
+  int? _selectedGenderval;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<int>(
+      value: _selectedGenderval,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: ConstantColors.greycolor),
+        ),
+      ),
+      items: const [
+        DropdownMenuItem(value: -1, child: Text('Male')),
+        DropdownMenuItem(value: 2, child: Text('Female')),
+        DropdownMenuItem(value: 3, child: Text('Others')),
+        DropdownMenuItem(value: 4, child: Text('Prefer not to Say')),
+      ],
+      onChanged: (int? newVal) {
+        setState(() {
+          _selectedGenderval = newVal;
+        });
+      },
+    );
+  }
+}
+
+//******************************************** DOB FIELD CLASS ***************************************************************************************************
+class DOBtextfieldWidget extends StatefulWidget {
+  const DOBtextfieldWidget({super.key});
+
+  @override
+  State<DOBtextfieldWidget> createState() => _DOBtextfieldWidgetState();
+}
+
+class _DOBtextfieldWidgetState extends State<DOBtextfieldWidget> {
+  late TextEditingController datecontroller;
+  DateTime currentDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    datecontroller = TextEditingController(
+      text: DateFormat('dd/MM/yyyy').format(currentDate),
+    );
+  }
+
+  @override
+  void dispose() {
+    datecontroller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      readOnly: true,
+      controller: datecontroller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: ConstantColors.greycolor),
+        ),
+      ),
+      onTap: () async {
+        DateTime? newDate = await showDatePicker(
+          context: context,
+          firstDate: DateTime(1900),
+          lastDate: DateTime(2100),
+          initialDate: currentDate,
+        );
+        if (newDate == null) return;
+
+        setState(() {
+          currentDate = newDate;
+          datecontroller.text = DateFormat('dd/MM/yyyy').format(currentDate);
+        });
+      },
+    );
+  }
+}
+
+//******************************************** FIELD TTEXT FIELD CLASS ***************************************************************************************************
+class FieldTextField extends StatelessWidget {
+  const FieldTextField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: ConstantColors.greycolor),
+        ),
+      ),
+    );
+  }
+}
+
+//******************************************** FIELD TITLE WIDGET CLASS  ***************************************************************************************************
+class FieldTItle extends StatelessWidget {
+  final String fieldTitle;
+  const FieldTItle({super.key, required this.fieldTitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      fieldTitle,
+      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    );
+  }
+}
+
+//******************************************** PROFILE PIC CLASS   ***************************************************************************************************
 class ProfilePic extends StatelessWidget {
   const ProfilePic({super.key});
 
@@ -55,7 +244,7 @@ class ProfilePic extends StatelessWidget {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage('assests/profilepic.png'),
+              image: AssetImage('assests/profilephoto.png'),
             ),
           ),
         ),

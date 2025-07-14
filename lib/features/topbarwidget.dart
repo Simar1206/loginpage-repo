@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Topbarwidget extends StatelessWidget {
   final Icon firsticon;
-  final Icon lasticon;
+  final Icon? lasticon;
   final String title;
   final VoidCallback onPress;
 
@@ -49,7 +49,9 @@ class Topbarwidget extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: ConstantColors.greycolor),
+              border: lasticon != null
+                  ? Border.all(color: ConstantColors.greycolor)
+                  : Border.all(color: Colors.transparent),
             ),
             child: Center(child: lasticon),
           ),
