@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: _emailcontroller,
                 decoration: InputDecoration(
-                  labelText: "Email Address",
+                  hintText: 'Enter Email',
                   constraints: BoxConstraints(maxHeight: 52),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -120,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: _usernamecontroller,
                 decoration: InputDecoration(
-                  labelText: "Username",
+                  hintText: 'Enter Username',
                   constraints: BoxConstraints(maxHeight: 52),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -145,9 +145,10 @@ class _RegisterPageState extends State<RegisterPage> {
               TextField(
                 controller: _passcontroller,
                 obscureText: _obsecuretxt,
+
                 obscuringCharacter: '*',
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  hintText: 'Enter Password',
                   //*icon suffix
                   suffixIcon: IconButton(
                     onPressed: togglevisibility,

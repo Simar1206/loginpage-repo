@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 
 class PersonalDetails extends StatefulWidget {
-  PersonalDetails({super.key});
+  const PersonalDetails({super.key});
 
   @override
   State<PersonalDetails> createState() => _PersonalDetailsState();
@@ -22,7 +22,12 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       bottomNavigationBar: Bottomnavbar(),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-        child: TextbuttonWidget(buttontitle: 'Save', buttonOnpress: () {}),
+        child: TextbuttonWidget(
+          buttontitle: 'Save',
+          buttonOnpress: () {
+            Get.toNamed('/home_page');
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -30,16 +35,44 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           child: Column(
             children: [
               //********************************************top widget***************************************************************************************************
-              Topbarwidget(
-                firsticon: Icon(Icons.arrow_back_ios),
-                lasticon: Icon(Icons.settings_outlined),
-                title: 'Personal Date',
-                onPress: () {
-                  bottomnavbar.setindex(0);
-                  Get.toNamed('/settings_page');
-                },
+
+              //*custom top bar:
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //*back
+                  TopHeaderIcon(
+                    icon: Icons.arrow_back_ios_new,
+                    onPress: () {
+                      bottomnavbar.setindex(0);
+                      Get.toNamed('/home_page');
+                    },
+                  ),
+
+                  //*titlr
+                  const Text(
+                    'Personal Details',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  //*settings
+                  TopHeaderIcon(
+                    icon: Icons.settings_outlined,
+                    onPress: () {
+                      Get.toNamed('/settings_page');
+                    },
+                  ),
+                ],
               ),
 
+              // Topbarwidget(
+              //   firsticon: Icon(Icons.arrow_back_ios),
+              //   lasticon: Icon(Icons.settings_outlined),
+              //   title: 'Personal Date',
+              //   onPress: () {
+              //     bottomnavbar.setindex(0);
+              //     Get.toNamed('/settings_page');
+              //   },
+              // ),
               const SizedBox(height: 16),
 
               //******************************************** PROFILE PIC ***************************************************************************************************
@@ -95,12 +128,34 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                   const SizedBox(height: 8),
                   //*TXTFIELD
                   FieldTextField(),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 60),
                 ],
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TopHeaderIcon extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPress;
+  const TopHeaderIcon({required this.icon, super.key, required this.onPress});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          border: Border.all(color: ConstantColors.greycolor),
+        ),
+        width: 36,
+        height: 36,
+        child: Icon(icon, size: 20),
       ),
     );
   }

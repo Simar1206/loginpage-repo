@@ -60,7 +60,8 @@ class ProductDiscriptionCard extends StatelessWidget {
         // height: heightcontainer,
         // width: widthcontainer,
         padding: EdgeInsets.all(8),
-        margin: EdgeInsets.all(8),
+        //! removed margin for personal phone
+        // margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: ConstantColors.headlinecolor,
@@ -83,6 +84,7 @@ class ProductDiscriptionCard extends StatelessWidget {
 
                 Align(
                   alignment: Alignment.topRight,
+                  //! added padding xoxoxoxoxox
                   child: Favoriteiconwidget(),
                 ),
               ],
@@ -153,6 +155,7 @@ class ProductDiscriptionCard extends StatelessWidget {
             ),
           ],
         ),
+        
       ),
     );
   }

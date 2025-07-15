@@ -28,7 +28,7 @@ class CartPageEmpty extends StatelessWidget {
                       bottomnavbar.setindex(0);
                       Get.toNamed('/home_page');
                     },
-                    firsticon: Icon(Icons.arrow_back_ios, size: 20),
+                    firsticon: Icon(Icons.arrow_back_ios_new, size: 20),
                     lasticon: Icon(Icons.more_horiz_outlined, size: 20),
                     title: 'My Cart',
                   ),
@@ -59,6 +59,7 @@ class CartPageEmpty extends StatelessWidget {
                   TextbuttonWidget(
                     buttontitle: 'Find Foods',
                     buttonOnpress: () {
+                      bottomnavbar.setindex(0);
                       Navigator.pushNamed(context, '/home_page');
                     },
                   ),

@@ -14,9 +14,7 @@ class Homeheader extends StatelessWidget {
       height: 250,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            'assests/homebackground2.png',
-          ),
+          image: AssetImage('assests/homebackground2.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -25,11 +23,11 @@ class Homeheader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Row: location + icons
+ 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // LEFT: Location Dropdown + City Name
+                
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,22 +73,13 @@ class Homeheader extends StatelessWidget {
                   ],
                 ),
 
-                // RIGHT: Notification and Search Icons
                 Row(
                   children: [
-                    Image.asset(
-                      'assests/Search.png',
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.cover,
-                    ),
+                    //*Search Icon:
+                    SearchHeaderIcon(icon: Icons.search),
+
                     const SizedBox(width: 12),
-                    Image.asset(
-                      'assests/Notification.png',
-                      height: 50,
-                      width: 45,
-                      fit: BoxFit.cover,
-                    ),
+                    SearchHeaderIcon(icon: Icons.notifications_outlined),
                   ],
                 ),
               ],
@@ -110,6 +99,25 @@ class Homeheader extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SearchHeaderIcon extends StatelessWidget {
+  final IconData icon;
+  const SearchHeaderIcon({required this.icon, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //padding: EdgeInsets.all(11),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: ConstantColors.headlinecolor),
+      ),
+      width: 40,
+      height: 40,
+      child: Icon(icon, color: ConstantColors.headlinecolor, size: 24),
     );
   }
 }

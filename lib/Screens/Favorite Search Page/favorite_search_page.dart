@@ -19,7 +19,7 @@ class _FavoriteSearchPageState extends State<FavoriteSearchPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

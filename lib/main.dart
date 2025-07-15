@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         // '/cart_page' : (context)=> CartPage(),
       },
 
-      home: Homepage(),
+      home: Onboardingscreen(),
     );
   }
 }

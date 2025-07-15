@@ -107,6 +107,7 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
                           child: Text(
                             "Skip",
                             style: TextStyle(
+                              fontWeight: FontWeight.w600,
                               fontSize: 15,
                               color: ConstantColors.headlinecolor,
                             ),
@@ -130,12 +131,14 @@ class _OnboardingscreenState extends State<Onboardingscreen> {
                               Text(
                                 "Next",
                                 style: TextStyle(
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 15,
                                   color: ConstantColors.headlinecolor,
                                 ),
                               ),
+                              const SizedBox(width: 8),
                               Icon(
-                                Icons.forward_sharp,
+                                Icons.arrow_right_alt,
                                 color: ConstantColors.headlinecolor,
                                 size: 20,
                               ),

@@ -69,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _emailcontroller,
                 decoration: InputDecoration(
-                  labelText: "Email Address",
                   constraints: BoxConstraints(maxHeight: 52), //52
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -99,7 +98,6 @@ class _LoginPageState extends State<LoginPage> {
                 obscuringCharacter: '*',
                 // maxLength: 327,
                 decoration: InputDecoration(
-                  labelText: "Password",
                   //icon suffix
                   suffixIcon: IconButton(
                     onPressed: _togglevisibility,
