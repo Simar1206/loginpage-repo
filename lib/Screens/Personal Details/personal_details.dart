@@ -1,7 +1,9 @@
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/features/topbarwidget.dart';
+import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +17,10 @@ class PersonalDetails extends StatefulWidget {
 }
 
 class _PersonalDetailsState extends State<PersonalDetails> {
+  final User? usr = FirebaseAuth.instance.currentUser;
+  final Repository repo = Repository();
   final Bottomnavbarclass bottomnavbar = Get.find<Bottomnavbarclass>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +94,16 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                   FieldTItle(fieldTitle: 'Full Name'),
                   const SizedBox(height: 8),
                   //*TXTFIELD
-                  FieldTextField(),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: ConstantColors.greycolor),
+                    ),
+                    child: Text(usr?.displayName ?? ''),
+                  ),
                   const SizedBox(height: 12),
 
                   //*TITLE
@@ -127,7 +141,16 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                   FieldTItle(fieldTitle: 'Email'),
                   const SizedBox(height: 8),
                   //*TXTFIELD
-                  FieldTextField(),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: ConstantColors.greycolor),
+                    ),
+                    child: Text(usr?.email ?? ''),
+                  ),
                   const SizedBox(height: 60),
                 ],
               ),

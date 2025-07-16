@@ -11,16 +11,19 @@ import 'package:burgerapp/Screens/home/homepage.dart';
 import 'package:burgerapp/Screens/forgotpassword/forgotpass_page.dart';
 import 'package:burgerapp/Screens/loginScreen/login_page.dart';
 import 'package:burgerapp/Screens/RegisterScreen/register_page.dart';
+import 'package:burgerapp/firebase_options.dart';
 import 'package:burgerapp/onboardingscreen/onboardingscreen.dart';
 import 'package:burgerapp/settings/setting_page.dart';
 import 'package:burgerapp/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(Discount());
   Get.put(CartController());
 

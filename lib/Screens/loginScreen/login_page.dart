@@ -1,5 +1,6 @@
 import 'package:burgerapp/features/auth/widgets/signinwidget.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
+import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,12 +15,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _obsecuretxt = true;
 
-  final TextEditingController _emailcontroller = TextEditingController();
-
-  final TextEditingController _passcontroller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailcontroller = TextEditingController();
+    final TextEditingController passcontroller = TextEditingController();
+
+    final Repository repo = Repository();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -67,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 8), //8
 
               TextField(
-                controller: _emailcontroller,
+                controller: emailcontroller,
                 decoration: InputDecoration(
                   constraints: BoxConstraints(maxHeight: 52), //52
                   border: OutlineInputBorder(
@@ -93,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 8), //8
 
               TextField(
-                controller: _passcontroller,
+                controller: passcontroller,
                 obscureText: _obsecuretxt,
                 obscuringCharacter: '*',
                 // maxLength: 327,
@@ -139,21 +141,21 @@ class _LoginPageState extends State<LoginPage> {
               //signup button
               TextbuttonWidget(
                 buttontitle: 'Sign In',
-                buttonOnpress: () {
-                  if (_emailcontroller.text.isEmpty ||
-                      _passcontroller.text.isEmpty) {
-                    Fluttertoast.showToast(
-                      msg: "Fill all the fields",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.redAccent[100],
-                      textColor: Colors.red,
-                      fontSize: 20,
+                buttonOnpress: () async {
+                  if (emailcontroller.text.isNotEmpty &&
+                      passcontroller.text.isNotEmpty) {
+                    final result = await repo.Login(
+                      email: emailcontroller.text,
+                      password: passcontroller.text,
                     );
-                    return;
+                    if (result.firebase_result) {
+                      Navigator.pushNamed(context, '/home_page');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result.message ?? '')),
+                      );
+                    }
                   }
-
-                  Navigator.pushNamed(context, '/register_page');
                 },
               ),
 

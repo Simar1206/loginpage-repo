@@ -1,4 +1,5 @@
 import 'package:burgerapp/features/topbarwidget.dart';
+import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class LocationController extends GetxController {
 }
 
 class SettingPage extends StatelessWidget {
+  final Repository repo = Repository();
   SwitchController switchController = Get.put(SwitchController());
   LocationController locationController = Get.put(LocationController());
   SettingPage({super.key});
@@ -46,7 +48,7 @@ class SettingPage extends StatelessWidget {
         child: Column(
           children: [
             Topbarwidget(
-              firsticon: Icon(Icons.arrow_back_ios),
+              firsticon: Icon(Icons.arrow_back_ios_new),
               lasticon: null,
               title: 'Settings',
               onPress: () {
@@ -101,6 +103,28 @@ class SettingPage extends StatelessWidget {
                   title: 'Terms And Conditions',
                   Preffixlabel: null,
                   icon: Icons.keyboard_arrow_right,
+                ),
+
+                const SizedBox(height: 15),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.white70),
+                  ),
+                  onPressed: () {
+                    repo.SignOut().then((_) {
+                      Navigator.pushNamed(context, '/login_page');
+                    });
+                  },
+                  child: Center(
+                    child: Text(
+                      'Sign Out',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

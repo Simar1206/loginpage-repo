@@ -1,5 +1,6 @@
 import 'package:burgerapp/features/auth/widgets/signinwidget.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
+import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +17,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passcontroller = TextEditingController();
   final TextEditingController _usernamecontroller = TextEditingController();
+
+  final Repository repo = Repository();
 
   bool _obsecuretxt = true;
   bool val = true;
@@ -229,22 +232,27 @@ class _RegisterPageState extends State<RegisterPage> {
               //*signup button
               TextbuttonWidget(
                 buttontitle: 'Register',
-                buttonOnpress: () {
-                  if (_emailcontroller.text.isEmpty ||
-                      _passcontroller.text.isEmpty ||
-                      _usernamecontroller.text.isEmpty ||
-                      val == false) {
-                    Fluttertoast.showToast(
-                      msg: "Please fill in all the fields",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.redAccent[100],
-                      textColor: Colors.red,
-                      fontSize: 20,
+                buttonOnpress: () async {
+                  if (_emailcontroller.text.isNotEmpty &&
+                      _passcontroller.text.isNotEmpty &&
+                      _usernamecontroller.text.isNotEmpty) {
+                    final result = await repo.Register(
+                      email: _emailcontroller.text,
+                      password: _passcontroller.text,
+                      fullname: _usernamecontroller.text,
                     );
-                    return;
+                    if (result.firebase_result) {
+                      Navigator.pushNamed(context, '/login_page');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result.message ?? '')),
+                      );
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("All fields Are required")),
+                    );
                   }
-                  Get.toNamed('/home_page');
                 },
               ),
 
