@@ -68,7 +68,7 @@ class _CardwidgetState extends State<Cardwidget> {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+         // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             //*checkbox
             Checkbox(
@@ -90,90 +90,92 @@ class _CardwidgetState extends State<Cardwidget> {
 
             //*SizedBox
             const SizedBox(width: 16),
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //*card title
-                Text(
-                  widget.ProductDiscriptionCardObj.card_title,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                ),
-
-                const SizedBox(height: 4),
-
-                //*cardprice
-                Text(
-                  '\$ ${doubleformatter.format(widget.ProductDiscriptionCardObj.price).toString()}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    color: ConstantColors.primarycolor,
+//! new eddited added exapnded
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //*card title
+                  Text(
+                    widget.ProductDiscriptionCardObj.card_title,
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                   ),
-                ),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 4),
 
-                //*inc/dec/remove
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: DecrementCounter,
-                          child: IncDecButtons(
-                            icons: Icon(
-                              Icons.remove,
-                              size: 16,
-                              color: Color(0xff878787),
+                  //*cardprice
+                  Text(
+                    '\$ ${doubleformatter.format(widget.ProductDiscriptionCardObj.price).toString()}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: ConstantColors.primarycolor,
+                    ),
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  //*inc/dec/remove
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: DecrementCounter,
+                            child: IncDecButtons(
+                              icons: Icon(
+                                Icons.remove,
+                                size: 16,
+                                color: Color(0xff878787),
+                              ),
                             ),
                           ),
-                        ),
 
-                        //*SIzedbox
-                        const SizedBox(width: 12),
+                          //*SIzedbox
+                          const SizedBox(width: 12),
 
-                        //!quantity (NOW READ FROM CARTCONTROLLER)
-                        Obx(
-                          () => Text(
-                            (cartController.cartItems[widget
-                                        .ProductDiscriptionCardObj] ??
-                                    0)
-                                .toString(),
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                          //!quantity (NOW READ FROM CARTCONTROLLER)
+                          Obx(
+                            () => Text(
+                              (cartController.cartItems[widget
+                                          .ProductDiscriptionCardObj] ??
+                                      0)
+                                  .toString(),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                        ),
 
-                        //*SIzedbox
-                        const SizedBox(width: 12),
+                          //*SIzedbox
+                          const SizedBox(width: 12),
 
-                        //*inc
-                        GestureDetector(
-                          onTap: () => IncrementCounter(),
-                          child: IncDecButtons(
-                            icons: Icon(Icons.add, size: 16),
+                          //*inc
+                          GestureDetector(
+                            onTap: () => IncrementCounter(),
+                            child: IncDecButtons(
+                              icons: Icon(Icons.add, size: 16),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
 
-                    //*SizedBox
-                    const SizedBox(width: 44),
-                    GestureDetector(
-                      onTap: () {
-                        cartController.RemovefromCart(
-                          widget.ProductDiscriptionCardObj,
-                        );
-                      },
-                      child: Image.asset('assests/trashicon.png'),
-                    ),
-                  ],
-                ),
-              ],
+                      //*SizedBox
+                      const SizedBox(width: 44),
+                      GestureDetector(
+                        onTap: () {
+                          cartController.RemovefromCart(
+                            widget.ProductDiscriptionCardObj,
+                          );
+                        },
+                        child: Image.asset('assests/trashicon.png'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -197,17 +199,3 @@ class _CardwidgetState extends State<Cardwidget> {
     );
   }
 }
-
-/*Key Changes in this cardwidget.dart:
-
-CounterController Class Definition: Remains untouched at the top of the file.
-
-controllercounter Instance: The line final CounterController controllercounter = CounterController(); inside _CardwidgetState has been removed/commented out.
-
-New IncrementCartItem and DecrementCartItem Methods: These methods are added to _CardwidgetState and directly call the cartController's methods (incrementProductQuantity and decrementProductQuantity).
-
-Quantity Display in Obx: Now reads (cartController.cartItems[widget.ProductDiscriptionCardObj] ?? 0).toString(), ensuring it reflects the global cart quantity.
-
-onTap for Buttons: The GestureDetector onTap for the increment and decrement buttons now call IncrementCartItem and DecrementCartItem respectively.
-
-Price Formatting: Adjusted doubleformatter and price display to ensure consistent formatting (e.g., \$ ${doubleformatter.format(widget.ProductDiscriptionCardObj.price)}). */

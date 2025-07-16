@@ -73,12 +73,11 @@ class ProductDiscriptionCard extends StatelessWidget {
               // alignment: Alignment.topRight,
               children: [
                 SizedBox(
-                  width: double.maxFinite,
-                  child: Image.asset(
-                    imageurl,
-                    height: 110,
-                    width: 137,
-                    fit: BoxFit.contain,
+                  height: 105,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(imageurl, fit: BoxFit.cover),
                   ),
                 ),
 
@@ -111,7 +110,7 @@ class ProductDiscriptionCard extends StatelessWidget {
                       size: 16,
                       color: ConstantColors.primarycolor,
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(width: 4),
                     Text(
                       rating.toString(),
                       style: TextStyle(
@@ -142,10 +141,10 @@ class ProductDiscriptionCard extends StatelessWidget {
             ),
             //*SizedBox
             SizedBox(height: 6),
-            Align(
-              alignment: Alignment.centerLeft,
+            Container(
+              alignment: Alignment.bottomLeft,
               child: Text(
-                '\$ ${doubleformatter.format(price).toString()}',
+                '\$ ${doubleformatter.format(price)}',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -155,7 +154,6 @@ class ProductDiscriptionCard extends StatelessWidget {
             ),
           ],
         ),
-        
       ),
     );
   }
