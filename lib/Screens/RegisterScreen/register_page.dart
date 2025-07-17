@@ -3,8 +3,6 @@ import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

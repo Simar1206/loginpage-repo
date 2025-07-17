@@ -5,7 +5,7 @@ class AuthResult {
   final bool firebase_result;
   final String? message;
 
-  AuthResult({required this.firebase_result, required this.message}) {}
+  AuthResult({required this.firebase_result, required this.message});
 }
 
 class Repository extends FirebaseHelper {
@@ -51,6 +51,27 @@ class Repository extends FirebaseHelper {
       }
     } on FirebaseException catch (e) {
       return AuthResult(firebase_result: false, message: geterrorMessage(e));
+    }
+  }
+
+  Future<AuthResult> ForgotPassword({required String email}) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+
+      return AuthResult(
+        firebase_result: true,
+        message:
+            'If an account exists for ${email}, a password reset link has been sent to your inbox. Please check your spam folder as well.',
+      );
+    } on FirebaseException catch (e) {
+      return AuthResult(firebase_result: false, message: geterrorMessage(e));
+    } catch (e) {
+      // Catch any other unexpected errors
+      return AuthResult(
+        firebase_result: false,
+        message:
+            'An unexpected error occurred: ${e.toString()}. Please try again later.',
+      );
     }
   }
 

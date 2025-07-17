@@ -1,7 +1,11 @@
 import 'package:burgerapp/Screens/forgotpassword/bottom_model_screen.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
+import 'package:burgerapp/firebase/repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class ForgotpassPage extends StatefulWidget {
   const ForgotpassPage({super.key});
@@ -12,7 +16,16 @@ class ForgotpassPage extends StatefulWidget {
 
 class _ForgotpassPageState extends State<ForgotpassPage> {
   final TextEditingController _emailcontroller = TextEditingController();
+  final Repository repo = Repository();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailcontroller.dispose();
+    super.dispose();
+  }
+
+  //!
   void _bottommodelscr() {
     showModalBottomSheet(
       context: context,
@@ -23,32 +36,64 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: TextbuttonWidget(
+          buttontitle: 'Continue',
+          buttonOnpress: () async {
+            if (_emailcontroller.text.isEmpty) {
+              Get.snackbar(
+                'Error',
+                'You are required to fill in the email address',
+              );
+              return;
+            } else {
+              Get.dialog(
+                Center(child: CircularProgressIndicator()),
+                barrierDismissible: false,
+              );
+              final result = await repo.ForgotPassword(
+                email: _emailcontroller.text,
+              );
+              Get.back();
+
+              if (result.firebase_result) {
+                Get.snackbar(
+                  'Success',
+                  result.message ?? 'Password reset email sent',
+                );
+                _bottommodelscr();
+              } else {
+                Get.snackbar(
+                  'Error',
+                  result.message ?? 'Unable to send reset link',
+                );
+              }
+            }
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          padding: EdgeInsets.only(top: 76),
+          padding: EdgeInsets.symmetric(horizontal: 24),
 
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //title + description
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Forgot password?",
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
-                ),
+              const Text(
+                "Forgot password?",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 8),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Enter your email address and we'll send you confirmation code to reset your password",
+              const Text(
+                "Enter your email address and we'll send you confirmation code to reset your password",
 
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff878787),
-                  ),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff878787),
                 ),
               ),
 
@@ -56,20 +101,16 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
               SizedBox(height: 32),
 
               // email address title + txtfield
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Email Address",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-                ),
+              const Text(
+                "Email Address",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
               ),
               //*Sizedbox
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
               TextField(
                 controller: _emailcontroller,
                 decoration: InputDecoration(
-                  labelText: "Email Address",
                   constraints: BoxConstraints(maxHeight: 52),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -78,29 +119,12 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
               ),
 
               //sizedbox
-              SizedBox(height: 80),
+              const SizedBox(height: 80),
 
               //signup button
-              TextbuttonWidget(
-                buttontitle: 'Continue',
-                buttonOnpress: () {
-                  if (_emailcontroller.text.isEmpty) {
-                    Fluttertoast.showToast(
-                      msg: "Enter Email Address.",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.redAccent[100],
-                      textColor: Colors.red,
-                      fontSize: 20,
-                    );
-                    return;
-                  }
-                  _bottommodelscr();
-                },
-              ),
 
               //sizedbox
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
 
               //divider
             ],

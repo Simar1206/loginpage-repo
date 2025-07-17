@@ -3,7 +3,6 @@ import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,13 +14,30 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _obsecuretxt = true;
 
+  late final TextEditingController _emailController;
+  late final TextEditingController _passController;
+
+  final Repository repo =
+      Repository(); // Can be here or initialized in initState if needed
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controllers here, only once when the widget is first created
+    _emailController = TextEditingController();
+    _passController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers when the widget is removed from the widget tree
+    _emailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailcontroller = TextEditingController();
-    final TextEditingController passcontroller = TextEditingController();
-
-    final Repository repo = Repository();
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -69,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 8), //8
 
               TextField(
-                controller: emailcontroller,
+                controller: _emailController,
                 decoration: InputDecoration(
                   constraints: BoxConstraints(maxHeight: 52), //52
                   border: OutlineInputBorder(
@@ -95,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 8), //8
 
               TextField(
-                controller: passcontroller,
+                controller: _passController,
                 obscureText: _obsecuretxt,
                 obscuringCharacter: '*',
                 // maxLength: 327,
@@ -142,11 +158,11 @@ class _LoginPageState extends State<LoginPage> {
               TextbuttonWidget(
                 buttontitle: 'Sign In',
                 buttonOnpress: () async {
-                  if (emailcontroller.text.isNotEmpty &&
-                      passcontroller.text.isNotEmpty) {
+                  if (_emailController.text.isNotEmpty &&
+                      _passController.text.isNotEmpty) {
                     final result = await repo.Login(
-                      email: emailcontroller.text,
-                      password: passcontroller.text,
+                      email: _emailController.text,
+                      password: _passController.text,
                     );
                     if (result.firebase_result) {
                       Navigator.pushNamed(context, '/home_page');

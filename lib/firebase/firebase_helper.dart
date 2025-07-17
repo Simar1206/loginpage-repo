@@ -20,6 +20,8 @@ class FirebaseHelper {
         return 'An account with this email already exists.';
       case 'invalid-email':
         return 'The provided email address is invalid.';
+      case 'invalid-password':
+        return 'The provided email address is invalid.';
       default:
         return 'Unexpected Error ${e.message}';
     }

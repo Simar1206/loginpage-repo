@@ -4,6 +4,9 @@ import 'package:burgerapp/Screens/Personal%20Details/personal_details.dart';
 import 'package:burgerapp/Screens/cart/cart_controller.dart';
 import 'package:burgerapp/Screens/cart/cart_page.dart';
 import 'package:burgerapp/Screens/cart/cart_page_empty.dart';
+import 'package:burgerapp/Screens/forgotpassword/boarding_screen_password_change.dart';
+import 'package:burgerapp/Screens/forgotpassword/bottom_model_screen.dart';
+import 'package:burgerapp/Screens/forgotpassword/create_new_password_screen.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/drinks_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/pizza_page.dart';
 import 'package:burgerapp/Screens/home/Category%20Section/taco_page.dart';
@@ -62,9 +65,15 @@ class MyApp extends StatelessWidget {
         '/favorite_search_page': (context) => FavoriteSearchPage(),
         '/settings_page': (context) => SettingPage(),
         // '/cart_page' : (context)=> CartPage(),
+        '/boarding_screen_for_new_pass': (context) =>
+            BoardingScreenPasswordChange(),
+        'forgot_password_page': (context) => ForgotpassPage(),
+        '/create_new_password_page': (context) => CreateNewPasswordScreen(),
+        'bottom_model_password_screen': (context) => BottomModelScreen(),
       },
 
-      home: Homepage(),
+      // main.dart (or app_routes.dart)
+      home: SplashScreen(),
     );
   }
 }

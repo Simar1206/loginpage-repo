@@ -150,6 +150,7 @@ class _CartPageNotEmptyState extends State<CartPage> {
                 width: double.infinity,
                 height: heightTxtfiels,
                 child: TextField(
+                  
                   //*onSubmit
                   onSubmitted: (value) {
                     DiscountController.SetDiscount(value, context);

@@ -66,9 +66,9 @@ class _CardwidgetState extends State<Cardwidget> {
         borderRadius: BorderRadiusGeometry.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0),
         child: Row(
-         // mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             //*checkbox
             Checkbox(
@@ -90,7 +90,7 @@ class _CardwidgetState extends State<Cardwidget> {
 
             //*SizedBox
             const SizedBox(width: 16),
-//! new eddited added exapnded
+            //! new eddited added exapnded
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class _CardwidgetState extends State<Cardwidget> {
                       ),
 
                       //*SizedBox
-                      const SizedBox(width: 44),
+                      //rconst SizedBox(width: 44),
                       GestureDetector(
                         onTap: () {
                           cartController.RemovefromCart(
@@ -172,6 +172,7 @@ class _CardwidgetState extends State<Cardwidget> {
                         },
                         child: Image.asset('assests/trashicon.png'),
                       ),
+                      const SizedBox(width: 2),
                     ],
                   ),
                 ],

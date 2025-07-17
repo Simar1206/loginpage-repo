@@ -1,6 +1,5 @@
 import 'package:burgerapp/features/auth/widgets/bottomnavbar.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
-import 'package:burgerapp/features/topbarwidget.dart';
 import 'package:burgerapp/firebase/repository.dart';
 import 'package:burgerapp/utils/constants/constant_colors/constant_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +29,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
         child: TextbuttonWidget(
           buttontitle: 'Save',
           buttonOnpress: () {
+            bottomnavbar.setindex(0);
             Get.toNamed('/home_page');
           },
         ),

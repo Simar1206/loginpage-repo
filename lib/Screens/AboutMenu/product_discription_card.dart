@@ -80,7 +80,7 @@ class ProductDiscriptionCard extends StatelessWidget {
                     child: Image.asset(imageurl, fit: BoxFit.cover),
                   ),
                 ),
-
+        
                 Align(
                   alignment: Alignment.topRight,
                   //! added padding xoxoxoxoxox
@@ -88,10 +88,10 @@ class ProductDiscriptionCard extends StatelessWidget {
                 ),
               ],
             ),
-
+        
             //*SizedBox
             SizedBox(height: 8),
-
+        
             //*Card Title
             Text(
               card_title,

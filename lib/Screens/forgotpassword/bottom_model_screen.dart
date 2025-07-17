@@ -46,7 +46,7 @@ class BottomModelScreen extends StatelessWidget {
           TextbuttonWidget(
             buttontitle: 'Verify Account',
             buttonOnpress: () {
-              Navigator.pushNamed(context, 'login_page');
+              Navigator.pushNamed(context, '/login_page');
             },
           ),
         ],

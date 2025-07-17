@@ -22,7 +22,7 @@ class SwitchController extends GetxController {
   }
 }
 
-class LocationController extends GetxController {
+class LocationNotificController extends GetxController {
   RxBool currentswitchvalue = false.obs;
   void toggleSwitch(bool newState) {
     currentswitchvalue.value = newState;
@@ -37,7 +37,9 @@ class LocationController extends GetxController {
 class SettingPage extends StatelessWidget {
   final Repository repo = Repository();
   SwitchController switchController = Get.put(SwitchController());
-  LocationController locationController = Get.put(LocationController());
+  LocationNotificController locationController = Get.put(
+    LocationNotificController(),
+  );
   SettingPage({super.key});
 
   @override
@@ -177,7 +179,7 @@ class FieldWithSpacingAndIcon extends StatelessWidget {
 class LocationWidget extends StatelessWidget {
   const LocationWidget({super.key, required this.locationController});
 
-  final LocationController locationController;
+  final LocationNotificController locationController;
 
   @override
   Widget build(BuildContext context) {
