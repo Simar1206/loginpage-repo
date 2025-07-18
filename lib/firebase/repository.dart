@@ -61,7 +61,7 @@ class Repository extends FirebaseHelper {
       return AuthResult(
         firebase_result: true,
         message:
-            'If an account exists for ${email}, a password reset link has been sent to your inbox. Please check your spam folder as well.',
+            'If an account exists for $email, a password reset link has been sent to your inbox. Please check your spam folder as well.',
       );
     } on FirebaseException catch (e) {
       return AuthResult(firebase_result: false, message: geterrorMessage(e));

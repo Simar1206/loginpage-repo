@@ -1,10 +1,6 @@
-import 'package:burgerapp/Screens/forgotpassword/bottom_model_screen.dart';
 import 'package:burgerapp/features/textbuttonwidget.dart';
 import 'package:burgerapp/firebase/repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {

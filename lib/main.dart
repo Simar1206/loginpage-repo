@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
       },
 
       // main.dart (or app_routes.dart)
-      home: SplashScreen(),
+      home: LoginPage(),
     );
   }
 }
